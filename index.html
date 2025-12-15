@@ -1,94 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Time Apart ❤️</title>
+<meta charset="UTF-8">
+<title>Janu & Saurabh ❤️</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      text-align: center;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 40px 50px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    }
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff5f9e, #ff85c1);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
+  .container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.18);
+    padding: 45px 55px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    z-index: 10;
+    max-width: 90%;
+  }
 
-    p {
-      font-size: 18px;
-      opacity: 0.9;
-      margin-bottom: 25px;
-    }
+  h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
 
-    .timer {
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+  .names {
+    font-size: 22px;
+    opacity: 0.95;
+    margin-bottom: 25px;
+  }
 
-    .heart {
-      margin-top: 20px;
-      font-size: 22px;
-      animation: pulse 1.5s infinite;
-    }
+  .timer {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-shadow: 0 0 15px rgba(255,255,255,0.7);
+  }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+  .quote {
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0.9;
+    margin-top: 20px;
+    min-height: 24px;
+  }
+
+  .footer {
+    margin-top: 25px;
+    font-size: 16px;
+    opacity: 0.85;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(100vh) scale(0.8);
+      opacity: 0;
     }
-  </style>
+    10% {
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-10vh) scale(1.2);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Time Since We Last Met ❤️</h1>
-    <p>Every second without you feels longer...</p>
+<div class="container">
+  <h1>Time Since We Last Met ❤️</h1>
 
-    <div class="timer" id="timer">
-      Loading...
-    </div>
+  <div class="names">Janu & Saurabh 💕</div>
 
-    <div class="heart">💔 ➜ ❤️</div>
+  <div class="timer" id="timer">Loading...</div>
+
+  <div class="quote" id="quote"></div>
+
+  <div class="footer">
+    Every second apart is one second closer to us 💗
   </div>
+</div>
 
-  <script>
-    // 👇 CHANGE THIS DATE & TIME
-    // Format: YYYY-MM-DDTHH:MM:SS
-    const lastMet = new Date("2025-12-07T18:20:00");
+<script>
+  // 📅 Last met: 7 December 2025, 6:20 PM
+  const lastMet = new Date("2025-12-07T18:20:00");
 
-    function updateTimer() {
-      const now = new Date();
-      const diff = now - lastMet;
+  const quotes = [
+    "Distance means so little when someone means so much.",
+    "Every second without you, I love you more.",
+    "Even time misses you when you’re not here.",
+    "We’re apart, but our hearts never are.",
+    "Counting seconds until I can hold you again."
+  ];
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - lastMet;
 
-      document.getElementById("timer").innerHTML =
-        `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
-  </script>
+    document.getElementById("timer").innerHTML =
+      `${days} days • ${hours} hours • ${minutes} minutes • ${seconds} seconds`;
+  }
+
+  function changeQuote() {
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quote").innerText = quote;
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 10000);
+  }
+
+  setInterval(updateTimer, 1000);
+  setInterval(changeQuote, 5000);
+  setInterval(createHeart, 400);
+
+  updateTimer();
+  changeQuote();
+</script>
 
 </body>
 </html>
