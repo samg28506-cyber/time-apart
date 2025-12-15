@@ -5,14 +5,12 @@
 <title>Janu & Saurabh ❤️</title>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #ff5f9e, #ff85c1);
+    background: linear-gradient(135deg, #ff5fa2, #ff85c1);
     font-family: 'Segoe UI', sans-serif;
     overflow: hidden;
     display: flex;
@@ -23,67 +21,51 @@
 
   .container {
     text-align: center;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255,255,255,0.2);
     padding: 45px 55px;
-    border-radius: 25px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-    z-index: 10;
+    border-radius: 28px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 35px 70px rgba(0,0,0,0.35);
+    z-index: 5;
     max-width: 90%;
   }
 
-  h1 {
-    font-size: 34px;
-    margin-bottom: 10px;
-  }
-
-  .names {
-    font-size: 22px;
-    opacity: 0.95;
-    margin-bottom: 25px;
-  }
-
+  h1 { font-size: 34px; margin-bottom: 10px; }
+  .names { font-size: 22px; margin-bottom: 25px; }
   .timer {
     font-size: 30px;
     font-weight: bold;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9);
     margin: 20px 0;
-    text-shadow: 0 0 15px rgba(255,255,255,0.7);
   }
 
   .quote {
     font-size: 18px;
     font-style: italic;
-    opacity: 0.9;
+    min-height: 26px;
     margin-top: 20px;
-    min-height: 24px;
   }
 
-  .footer {
-    margin-top: 25px;
-    font-size: 16px;
-    opacity: 0.85;
-  }
+  .footer { margin-top: 25px; font-size: 16px; }
 
-  /* 💗 BIGGER & CLEARER FLOATING HEARTS */
-  .heart {
+  /* 🌸 FLOATING ELEMENTS */
+  .float {
     position: absolute;
-    font-size: 30px; /* BIGGER */
-    opacity: 0.95; /* CLEARER */
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); /* GLOW */
+    font-size: 32px;
+    opacity: 1;
     animation: floatUp linear infinite;
     pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.9));
   }
 
   @keyframes floatUp {
     from {
-      transform: translateY(100vh) scale(0.9);
+      transform: translateY(110vh) scale(0.8);
       opacity: 0;
     }
-    15% {
-      opacity: 1;
-    }
+    15% { opacity: 1; }
     to {
-      transform: translateY(-10vh) scale(1.3);
+      transform: translateY(-10vh) scale(1.4);
       opacity: 0;
     }
   }
@@ -94,63 +76,63 @@
 
 <div class="container">
   <h1>Time Since We Last Met ❤️</h1>
-
   <div class="names">Janu & Saurabh 💕</div>
 
   <div class="timer" id="timer">Loading...</div>
-
   <div class="quote" id="quote"></div>
 
   <div class="footer">
-    Every second apart is one second closer to us 💗
+    Every second apart is filled with love 💗
   </div>
 </div>
 
 <script>
+  // 📅 LAST MET: 7 DEC 2025, 6:20 PM
   const lastMet = new Date("2025-12-07T18:20:00");
 
   const quotes = [
-    "Distance means so little when someone means so much.",
-    "Every second without you, I love you more.",
-    "Even time misses you when you’re not here.",
-    "We’re apart, but our hearts never are.",
-    "Counting seconds until I can hold you again."
+    "Distance means so little when love means everything.",
+    "Every second without you is a heartbeat for you.",
+    "Even time pauses when I think of you.",
+    "We may be apart, but our love floats everywhere.",
+    "Counting moments until I see you again."
   ];
+
+  const floatItems = ["💖","💕","💗","✨","✨","🌸","🌹","💘"];
 
   function updateTimer() {
     const now = new Date();
     const diff = now - lastMet;
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
 
     document.getElementById("timer").innerHTML =
-      `${days} days • ${hours} hours • ${minutes} minutes • ${seconds} seconds`;
+      `${d} days • ${h} hours • ${m} minutes • ${s} seconds`;
   }
 
   function changeQuote() {
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    document.getElementById("quote").innerText = quote;
+    document.getElementById("quote").innerText =
+      quotes[Math.floor(Math.random() * quotes.length)];
   }
 
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (7 + Math.random() * 6) + "s"; // SLOWER
-    document.body.appendChild(heart);
+  function createFloatingItem() {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerText = floatItems[Math.floor(Math.random() * floatItems.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (28 + Math.random() * 18) + "px";
+    el.style.animationDuration = (7 + Math.random() * 6) + "s";
+    document.body.appendChild(el);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 13000);
+    setTimeout(() => el.remove(), 14000);
   }
 
   setInterval(updateTimer, 1000);
   setInterval(changeQuote, 5000);
-  setInterval(createHeart, 600); // LESS CROWDING
+  setInterval(createFloatingItem, 350);
 
   updateTimer();
   changeQuote();
